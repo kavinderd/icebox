@@ -9,7 +9,7 @@ RSpec.describe UrlParser do
     end
 
     it "generates a new link with parsed information" do
-      expect(@class_dub).to receive(:new).with(title: "CGI: Ruby's Bare Metal", url: "http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/")
+      expect(@class_dub).to receive(:create).with(title: "CGI: Ruby's Bare Metal", url: "http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/")
       UrlParser.generate_link("http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/")
     end
 
