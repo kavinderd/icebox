@@ -10,5 +10,11 @@ RSpec.describe Link, :type => :model do
       subject.url = nil
       expect(subject).to be_invalid
     end
+
+    it "requires a title" do
+      expect(subject).to be_valid
+      subject.title = nil
+      expect(subject).to be_invalid
+    end
   end
 end
