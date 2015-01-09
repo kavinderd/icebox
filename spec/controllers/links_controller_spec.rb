@@ -24,14 +24,15 @@ RSpec.describe LinksController, :type => :controller do
   describe "POST create" do
 
     let(:link_params) { { "url" => "https://test.org" } }
-    let(:link_class) { class_double(Link).as_stubbed_const }
+    let(:service_class) { class_double(UrlParser).as_stubbed_const }
+
     it "creates a new link" do
-      expect(link_class).to receive(:create).with(link_params)
+      expect(service_class).to receive(:generate_link).with(link_params.fetch("url"))
       post :create, link: link_params
     end
 
     it "redirects to the index path" do
-      allow(link_class).to receive(:create)
+      allow(service_class).to receive(:generate_link)
       post :create, link: link_params
       expect(response).to redirect_to(links_path)
     end

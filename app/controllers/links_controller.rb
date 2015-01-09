@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   end
 
   def create
-    Link.create(link_params)
+    UrlParser.generate_link(params.fetch(:link).fetch(:url))
     flash[:notice] = "Link was successfully created"
     redirect_to links_path
   end
