@@ -66,6 +66,12 @@ RSpec.describe LinksController, :type => :controller do
       expect(@link_class).to receive(:find).with("1").and_return(@link)
       get :show, id: 1
     end
+
+    it "renders the show template" do
+      allow(@link_class).to receive(:find)
+      get :show, id: 1
+      expect(response).to render_template(:show)
+    end
   end
 
 end
