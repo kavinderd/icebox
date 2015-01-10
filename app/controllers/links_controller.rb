@@ -13,6 +13,9 @@ class LinksController < ApplicationController
     @links = Link.all
   end
 
+  def show
+  end
+
   private
 
   def link_params
