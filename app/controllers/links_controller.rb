@@ -14,6 +14,7 @@ class LinksController < ApplicationController
   end
 
   def show
+    @link = Link.find(params.fetch(:id))
   end
 
   private

@@ -63,7 +63,7 @@ RSpec.describe LinksController, :type => :controller do
     end
 
     it "fetches the requested link" do
-      expect(@link_class).to receive(:find).with(1).and_return(@link)
+      expect(@link_class).to receive(:find).with("1").and_return(@link)
       get :show, id: 1
     end
   end
