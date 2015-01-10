@@ -15,6 +15,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.find(params.fetch(:id))
+    @content= Pismo::Document.new(@link.url).body
   end
 
   private
