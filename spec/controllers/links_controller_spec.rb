@@ -56,4 +56,16 @@ RSpec.describe LinksController, :type => :controller do
 
   end
 
+  describe "GET show" do
+    before(:each) do
+      @link = object_double(Link.new)
+      @link_class = class_double(Link).as_stubbed_const
+    end
+
+    it "fetches the requested link" do
+      expect(@link_class).to receive(:find).with(1).and_return(@link)
+      get :show, id: 1
+    end
+  end
+
 end
