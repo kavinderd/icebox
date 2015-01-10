@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Link, :type => :model do
 
   context "validity" do
-    let(:subject) { Link.new(url: "https://test.org") }
+    let(:subject) { Link.new(url: "https://test.org", title: "Test Link") }
 
     it "requires a url" do
       expect(subject).to be_valid
