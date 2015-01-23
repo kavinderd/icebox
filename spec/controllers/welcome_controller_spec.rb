@@ -21,7 +21,7 @@ RSpec.describe WelcomeController, :type => :controller do
 
       it "redirects to the dashboard page" do
         get :index
-        expect(response).to redirect_to(dashboard_path)
+        expect(response).to redirect_to(dashboard_index_path)
       end
     end
 
