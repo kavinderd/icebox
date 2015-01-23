@@ -8,7 +8,7 @@ feature "User Accounts" do
     fill_in "user_password", with: "testpassword"
     fill_in "user_password_confirmation", with: "testpassword"
     click_button "Sign up"
-    expect(page).to have_content("You're Signed Up!")
+    expect(page).to have_content("Welcome! You have signed up successfully.")
     expect(page).to have_content("My Profile")
   end
   
