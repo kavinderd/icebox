@@ -17,6 +17,7 @@ RSpec.describe "links/index" do
   end
 
   it "renders a link to links#new" do
+    assign(:links, [])
     render
     expect(rendered).to match /New Link/
   end
