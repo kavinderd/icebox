@@ -13,4 +13,9 @@ RSpec.describe "dashboard/index.html.erb", :type => :view do
     expect(rendered).to match /Dashboard/
   end
 
+  it "renders a link to links index path" do
+    render
+    expect(rendered).to match /Links/
+  end
+
 end

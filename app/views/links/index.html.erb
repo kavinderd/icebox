@@ -1,3 +1,7 @@
+<%= link_to 'Add New Link', new_link_path %><br/>
+<hr />
+<ul>
 <% @links.each do |link| %>
-  <%= link_to link.title, link %>
+  <li><h3><%= link_to link.title, link %></h3> <%= link.created_at %><br/></li>
 <% end %>
+</ul>
