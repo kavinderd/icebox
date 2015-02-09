@@ -2,7 +2,7 @@ class LinksController < ApplicationController
   before_action :authenticate_user!
 
   def new
-    @link = Link.new
+    @link = current_user.links.build
   end
 
   def create
@@ -16,7 +16,7 @@ class LinksController < ApplicationController
   end
 
   def show
-    @link = Link.find(params.fetch(:id))
+    @link = current_user.links.find(params.fetch(:id))
     @content= Pismo::Document.new(@link.url).body
   end
 

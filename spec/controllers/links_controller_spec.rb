@@ -11,8 +11,7 @@ RSpec.describe LinksController, :type => :controller do
 
     before(:each) do
       @link = object_double(Link.new)
-      @link_class = class_double(Link).as_stubbed_const
-      allow(@link_class).to receive(:new).and_return(@link) 
+      allow(@user).to receive_message_chain(:links, :build).and_return(@link) 
     end
 
     it "returns http success" do
@@ -21,7 +20,7 @@ RSpec.describe LinksController, :type => :controller do
     end
 
     it "assigns a link model" do
-      expect(@link_class).to receive(:new).and_return(@link)
+      expect(@user).to receive_message_chain(:links, :build).and_return(@link)
       get :new
     end
   end
@@ -62,25 +61,24 @@ RSpec.describe LinksController, :type => :controller do
   describe "GET show" do
     before(:each) do
       @link = object_double(Link.new, url: "http://something.com")
-      @link_class = class_double(Link).as_stubbed_const
       @pismo_dub = class_double(Pismo::Document).as_stubbed_const
     end
 
     it "fetches the requested link" do
-      expect(@link_class).to receive(:find).with("1").and_return(@link)
+      expect(@user).to receive_message_chain(:links, :find).and_return(@link)
       allow(@pismo_dub).to receive_message_chain(:new, :body)
       get :show, id: 1
     end
 
     it "renders the show template" do
-      allow(@link_class).to receive(:find).and_return(@link)
+      allow(@user).to receive_message_chain(:links, :find).and_return(@link)
       allow(@pismo_dub).to receive_message_chain(:new, :body)
       get :show, id: 1
       expect(response).to render_template(:show)
     end
 
     it "fetches a url's content from pismo" do
-      allow(@link_class).to receive(:find).and_return(@link)
+      allow(@user).to receive_message_chain(:links, :find).and_return(@link)
       expect(@pismo_dub).to receive_message_chain(:new, :body)
       get :show, id: 1
     end
