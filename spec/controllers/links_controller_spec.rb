@@ -2,6 +2,11 @@ require 'rails_helper'
 
 RSpec.describe LinksController, :type => :controller do
 
+  before(:each) do
+    @user = object_double(User.new)
+    @request.env["warden"] = double(Warden, authenticate: @user, authenticate!: @user)
+  end
+
   describe "GET new" do
 
     before(:each) do
