@@ -12,3 +12,6 @@
 !/log/.keep
 /tmp
 /config/database.yml
+
+#Ignore Markdown files
+*.html.markdown.erb
