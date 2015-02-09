@@ -32,7 +32,7 @@ RSpec.describe LinksController, :type => :controller do
     let(:service_class) { class_double(UrlParser).as_stubbed_const }
 
     it "creates a new link" do
-      expect(service_class).to receive(:generate_link).with(link_params.fetch("url"))
+      expect(service_class).to receive(:generate_link).with(url: link_params.fetch("url"), user: @user)
       post :create, link: link_params
     end
 
@@ -46,16 +46,14 @@ RSpec.describe LinksController, :type => :controller do
 
   describe "GET index" do
 
-    let(:link_class) { class_double(Link).as_stubbed_const }
-
     it "renders the index template" do
-      allow(link_class).to receive(:all)
+      allow(@user).to receive(:links)
       get :index
       expect(response).to render_template(:index)
     end
 
     it "sends the all method to Link" do
-      expect(link_class).to receive(:all)
+      expect(@user).to receive(:links)
       get :index
     end
 

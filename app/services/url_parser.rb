@@ -1,9 +1,9 @@
 require "pismo"
 class UrlParser
 
-  def self.generate_link(url)
+  def self.generate_link(url:, user:)
     doc = Pismo::Document.new(url)
-    Link.create(title: doc.title, url: url)
+    user.links.build(title: doc.title, url: url).save!
   end
 
 end

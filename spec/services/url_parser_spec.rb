@@ -6,11 +6,22 @@ RSpec.describe UrlParser do
 
     before(:each) do
       @class_dub = class_double(Link).as_stubbed_const
+      @user = object_double(User.new)
+      @pismo = class_double(Pismo::Document).as_stubbed_const
+      @doc = double("doc", title: "Test Title")
+    end
+
+
+    it "retrieves the url title from Pismo::Document" do
+      expect(@pismo).to receive(:new).with("http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/").and_return(@doc)
+      allow(@user).to receive_message_chain(:links, :build, :save!)
+      UrlParser.generate_link(url:"http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/", user: @user)
     end
 
     it "generates a new link with parsed information" do
-      expect(@class_dub).to receive(:create).with(title: "CGI: Ruby's Bare Metal", url: "http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/")
-      UrlParser.generate_link("http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/")
+      allow(@pismo).to receive(:new).with("http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/").and_return(@doc)
+      expect(@user).to receive_message_chain(:links, :build, :save!)
+      UrlParser.generate_link(url:"http://www.mikeperham.com/2015/01/05/cgi-rubys-bare-metal/", user: @user)
     end
 
   end

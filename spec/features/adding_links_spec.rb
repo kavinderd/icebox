@@ -5,7 +5,7 @@ feature 'Adding links' do
   background do
     @user = User.create(email: 'testuser@test.com', password: 'testpassword', password_confirmation: 'testpassword')
     @user2 = User.create(email: 'testuser2@test.com', password: 'testpassword', password_confirmation: 'testpassword')
-    @user2.links.build(url: "http://6ftdan.com/allyourdev/2015/02/07/do-it-all-with-ruby/#IRRR").save
+    UrlParser.generate_link(url: "http://6ftdan.com/allyourdev/2015/02/07/do-it-all-with-ruby/#IRRR", user: @user2)
     visit "/signin"
     fill_in "user_email", with: @user.email
     fill_in "user_password", with: 'testpassword'
