@@ -32,6 +32,8 @@ gem "devise"
 
 gem "puma"
 
+gem "active_model_serializers"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -53,5 +55,6 @@ group :development, :test do
 
   gem 'rspec-rails'
   gem 'capybara'
+  gem 'pry-byebug'
 end
 

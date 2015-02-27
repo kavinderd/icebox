@@ -3,7 +3,10 @@ class UrlParser
 
   def self.generate_link(url:, user:)
     doc = Pismo::Document.new(url)
-    user.links.build(title: doc.title, url: url).save!
+    link = user.links.build(title: doc.title, url: url)
+    if link.save!
+      link
+    end
   end
 
 end

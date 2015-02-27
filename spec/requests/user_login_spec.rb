@@ -9,9 +9,10 @@ RSpec.describe "User Login via API" do
   context "when the login information is valid" do
 
     it "returns the authorization token" do
-      response = post "/api/v1/sessions", { email: @user.email, password: 'testtest' } 
+      post "/api/v1/signin", { user: {email: @user.email, password: 'testtest'} } 
       body = JSON.parse(response.body)
-      expect(body["token"]).to eq(@user.authorization_token)
+      expect(body["authentication_token"]).to eq(@user.authentication_token)
+      expect(body["email"]).to eq(@user.email)
     end
 
   end
@@ -19,7 +20,7 @@ RSpec.describe "User Login via API" do
   context "when the login information is invalid" do
 
     it "returns an error message" do
-      response = post "/api/v1/sessions", { email: 'invalid@email.com', password: 'testpass' }
+      post "/api/v1/signin", { email: 'invalid@email.com', password: 'testpass' }
       body = JSON.parse(response.body)
       expect(body["error"]).to eq("Invalid Email or Password")
     end

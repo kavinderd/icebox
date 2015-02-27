@@ -9,10 +9,14 @@ Rails.application.routes.draw do
     delete "signout", to: "devise/sessions#destroy"
   end
   resources :links
+  
 
   namespace :api do
     namespace :v1 do
-      resources :sessions, only: [:create, :destroy]
+      devise_scope :user do
+        post "signin", to: "sessions#create", as: :signin
+      end
+      resources :links
     end
   end
 
