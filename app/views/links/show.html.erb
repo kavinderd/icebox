@@ -1,2 +1,5 @@
-<%= @link.title %>
+<h3><%= @link.title %></h3>
+<br/>
+<%= link_to "See on original site", @link.url, target: "_rel" %>
+<hr/>
 <%= @content %>
