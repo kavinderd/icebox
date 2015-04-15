@@ -18,7 +18,7 @@ RSpec.describe Link, :type => :model do
     end
 
     it "allows a valid status" do
-      subject.status = Link.statuses.sample
+      subject.status = Link.statuses.keys.sample
       expect(subject).to be_valid
     end
 
