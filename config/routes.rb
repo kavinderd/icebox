@@ -8,7 +8,11 @@ Rails.application.routes.draw do
     get "signin", to: "devise/sessions#new"
     delete "signout", to: "devise/sessions#destroy"
   end
-  resources :links
+  resources :links do
+    member do 
+      put 'read'
+    end
+  end
   
 
   namespace :api do
