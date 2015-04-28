@@ -46,13 +46,13 @@ RSpec.describe LinksController, :type => :controller do
   describe "GET index" do
 
     it "renders the index template" do
-      allow(@user).to receive(:links)
+      allow(@user).to receive_message_chain(:links, :unread
       get :index
       expect(response).to render_template(:index)
     end
 
-    it "sends the all method to Link" do
-      expect(@user).to receive(:links)
+    it "defaults to retrieving only unread links" do
+      expect(@user).to receive_message_chain(:links, :unread)
       get :index
     end
 
@@ -81,6 +81,26 @@ RSpec.describe LinksController, :type => :controller do
       allow(@user).to receive_message_chain(:links, :find).and_return(@link)
       expect(@pismo_dub).to receive_message_chain(:new, :body)
       get :show, id: 1
+    end
+
+  end
+
+  describe "PUT 'read'" do
+    before(:each) do
+      @link = instance_double("Link") 
+    end
+
+    it "sets the links status to read" do
+      allow(@user).to receive_message_chain(:links, :find).and_return(@link)
+      expect(@link).to receive(:read!).and_return(true)
+      put :read, id: 1
+    end
+
+    it "redirects to the index path" do
+      allow(@user).to receive_message_chain(:links, :find).and_return(@link)
+      allow(@link).to receive(:read!).and_return(true)
+      put :read, id: 1
+      expect(response).to redirect_to(links_path)
     end
 
   end

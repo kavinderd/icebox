@@ -12,12 +12,20 @@ class LinksController < ApplicationController
   end
 
   def index
-    @links = current_user.links
+    @links = current_user.links.unread
   end
 
   def show
     @link = current_user.links.find(params.fetch(:id))
     @content= Pismo::Document.new(@link.url).body
+  end
+
+  def read
+    @link = current_user.links.find(params.fetch(:id))
+    if @link.read!
+      flash[:notice] = "Link marked as read"
+      redirect_to links_path
+    end
   end
 
   private

@@ -3,3 +3,9 @@
 <%= link_to "See on original site", @link.url, target: "_rel" %>
 <hr/>
 <%= @content %>
+<hr/>
+<%= button_to "Mark as Read", {action: "read", id: @link.id}, {method: :put, class: "btn btn-primary"}%>
+<br>
+
+
+
